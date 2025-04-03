@@ -1,0 +1,32 @@
+.breadcrumb {
+  padding-top: 10px;
+
+  @media (min-width: 768px) {
+    padding-top: 17px;
+  }
+
+  @media (min-width: 1024px) {
+    padding-top: 24px;
+  }
+
+  &__list {
+    display: flex;
+    align-items: center;
+    color: #969eae;
+    gap: 6px;
+  }
+
+  &__item {
+    position: relative;
+    padding-right: 13px;
+    &::after {
+      content: '>';
+      position: absolute;
+      right: 0px;
+    }
+
+    &:last-child::after {
+      content: '';
+    }
+  }
+}
