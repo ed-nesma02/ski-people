@@ -158,5 +158,8 @@ export const footer = () => {
   `;
 
   el.append(layout(child, 'footer__container'));
+
+  document.body.append(el)
+
   return el;
 };

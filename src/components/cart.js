@@ -1,6 +1,6 @@
 import { layout } from "./layout"
 
-export const cart = () => {
+export const cart = (parent) => {
   const el = document.createElement('section')
   el.classList.add('cart')
 
@@ -129,5 +129,5 @@ export const cart = () => {
 `
 
   el.append(layout(child, 'cart__container'))
-  return el;
+  parent.append(el)
 }

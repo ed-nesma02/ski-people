@@ -1,6 +1,6 @@
 import { layout } from "./layout"
 
-export const order = () => {
+export const order = (parent) => {
   const el = document.createElement('section')
   el.classList.add('order')
 
@@ -48,5 +48,5 @@ export const order = () => {
   `
 
   el.append(layout(child, 'order__container'))
-  return el;
+  return parent.append(el);
 }

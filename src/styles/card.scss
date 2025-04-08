@@ -2,6 +2,8 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  
   &__link {
     margin-bottom: 12px;
 
@@ -34,6 +36,7 @@
     margin-bottom: 12px;
     color: #1c1c1c;
     font-weight: 400;
+    height: 100%;
 
     @media (min-width: 768px) {
       flex-direction: row;

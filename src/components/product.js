@@ -1,75 +1,44 @@
 import { layout } from "./layout"
+import { API_URL } from "../js/const"
 
-export const product = (title) => {
+export const product = (data, parent) => {
   const el = document.createElement('section')
   el.classList.add('product')
 
+  let sliderMainImg = ''
+
+  for (const item of data.imgs) {
+    sliderMainImg = sliderMainImg + `
+      <div class="swiper-slide slider-img__slide">
+        <img
+          class="slider-img__img"
+          src="${API_URL}/img${item}"
+        />
+      </div>
+    `
+  }
+
+  let sliderThumbImg = ''
+
+  for (const item of data.imgs) {
+    sliderThumbImg = sliderThumbImg + `
+      <div class="swiper-slide slider-thumbnails__item">
+        <img
+          class="slider-thumbnails__img"
+          src="${API_URL}/img${item}"
+        />
+      </div>
+    `
+  }
+
+
   const child = `
-    ${title ? `<h2 class="product__title">${title}</h2>`: ''}
+    ${data.name ? `<h2 class="product__title">${data.name}</h2>`: ''}
     <div class="product__description">
       <div class="product__slider-wrapper">
         <div class="swiper product__slider">
           <div class="swiper-wrapper product__slider-img slider-img">
-            <div class="swiper-slide slider-img__slide">
-              <img
-                class="slider-img__img"
-                src="img/slider-main.png"
-              />
-            </div>
-            <div class="swiper-slide slider-img__slide">
-              <img
-                class="slider-img__img"
-                src="img/slider-main.png"
-              />
-            </div>
-            <div class="swiper-slide slider-img__slide">
-              <img
-                class="slider-img__img"
-                src="img/slider-main.png"
-              />
-            </div>
-            <div class="swiper-slide slider-img__slide">
-              <img
-                class="slider-img__img"
-                src="img/slider-main.png"
-              />
-            </div>
-            <div class="swiper-slide slider-img__slide">
-              <img
-                class="slider-img__img"
-                src="img/slider-main.png"
-              />
-            </div>
-            <div class="swiper-slide slider-img__slide">
-              <img
-                class="slider-img__img"
-                src="img/slider-main.png"
-              />
-            </div>
-            <div class="swiper-slide slider-img__slide">
-              <img
-                class="slider-img__img"
-                src="img/slider-main.png"
-              />
-            </div>
-            <div class="swiper-slide slider-img__slide">
-              <img
-                class="slider-img__img"
-                src="img/slider-main.png"
-              />
-            </div>
-            <div class="swiper-slide slider-img__slide">
-              <img
-                class="slider-img__img"
-                src="img/slider-main.png"
-              />
-            </div>
-            <div class="swiper-slide slider-img__slide">
-              <img
-                class="slider-img__img"
-                src="img/slider-main.png"
-              />
-            </div>
+            ${sliderMainImg}
           </div>
           <button
             type="button"
@@ -126,105 +95,46 @@ export const product = (title) => {
           class="swiper product__slider-thumbnails slider-thumbnails"
         >
           <div class="swiper-wrapper slider-thumbnails__list">
-            <div class="swiper-slide slider-thumbnails__item">
-              <img
-                class="slider-thumbnails__img"
-                src="img/slider-mini.png"
-              />
-            </div>
-            <div class="swiper-slide slider-thumbnails__item">
-              <img
-                class="slider-thumbnails__img"
-                src="img/slider-mini.png"
-              />
-            </div>
-            <div class="swiper-slide slider-thumbnails__item">
-              <img
-                class="slider-thumbnails__img"
-                src="img/slider-mini.png"
-              />
-            </div>
-            <div class="swiper-slide slider-thumbnails__item">
-              <img
-                class="slider-thumbnails__img"
-                src="img/slider-mini.png"
-              />
-            </div>
-            <div class="swiper-slide slider-thumbnails__item">
-              <img
-                class="slider-thumbnails__img"
-                src="img/slider-mini.png"
-              />
-            </div>
-            <div class="swiper-slide slider-thumbnails__item">
-              <img
-                class="slider-thumbnails__img"
-                src="img/slider-mini.png"
-              />
-            </div>
-            <div class="swiper-slide slider-thumbnails__item">
-              <img
-                class="slider-thumbnails__img"
-                src="img/slider-mini.png"
-              />
-            </div>
-            <div class="swiper-slide slider-thumbnails__item">
-              <img
-                class="slider-thumbnails__img"
-                src="img/slider-mini.png"
-              />
-            </div>
-            <div class="swiper-slide slider-thumbnails__item">
-              <img
-                class="slider-thumbnails__img"
-                src="img/slider-mini.png"
-              />
-            </div>
-            <div class="swiper-slide slider-thumbnails__item">
-              <img
-                class="slider-thumbnails__img"
-                src="img/slider-mini.png"
-              />
-            </div>
+            ${sliderThumbImg}
           </div>
         </div>
       </div>
 
       <div class="product__info">
-        <p class="product__info-price">5&nbsp;000&nbsp;₽</p>
+        <p class="product__info-price">${data.price.toLocaleString()}&nbsp;₽</p>
         <p class="product__info-id">арт.&nbsp;84348945757</p>
         <h3 class="product__info-title">Общие характеристики</h3>
         <table class="product__info-table product__table">
           <tr class="product__table-row">
             <td class="product__table-item">Коллекция</td>
-            <td class="product__table-item">Snow</td>
+            <td class="product__table-item">${data.collection}</td>
           </tr>
           <tr class="product__table-row">
             <td class="product__table-item">Производитель</td>
-            <td class="product__table-item">Россия</td>
+            <td class="product__table-item">${data.manufacturer}</td>
           </tr>
           <tr class="product__table-row">
             <td class="product__table-item">Гарантия</td>
-            <td class="product__table-item">18 мес.</td>
+            <td class="product__table-item">${data.warranty}</td>
           </tr>
           <tr class="product__table-row">
             <td class="product__table-item">Срок службы</td>
-            <td class="product__table-item">5 лет</td>
+            <td class="product__table-item">${data.life}</td>
           </tr>
           <tr class="product__table-row">
             <td class="product__table-item">Цвет</td>
-            <td class="product__table-item">Синий</td>
+            <td class="product__table-item">${data.color}</td>
           </tr>
           <tr class="product__table-row">
             <td class="product__table-item">Макс. нагрузка</td>
-            <td class="product__table-item">130 кг</td>
+            <td class="product__table-item">${data.max_weight}</td>
           </tr>
         </table>
         <div class="info-buttons">
-          <button class="info-buttons__to-cart" type="button">
+          <button data-id="${data.id}" class="info-buttons__to-cart" type="button">
             В корзину
           </button>
-          <button class="info-buttons__like">
+          <button data-id="${data.id}" class="info-buttons__like">
             <svg
               width="16"
               height="16"
@@ -248,5 +158,5 @@ export const product = (title) => {
   `
 
   el.append(layout(child, 'product__container'))
-  return el;
+  return parent.append(el);
 }

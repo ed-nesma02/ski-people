@@ -116,5 +116,8 @@ export const header = () => {
   `
 
   el.append(layout(child))
+
+  document.body.append(el)
+
   return el;
 }

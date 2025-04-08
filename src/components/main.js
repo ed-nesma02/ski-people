@@ -1,11 +1,16 @@
-export const main = (...childs) => {
+let isRender = false;
+
+export const main = () => {
+  if (isRender) {
+    return document.querySelector('main');
+  }
 
   const el = document.createElement('main');
   el.classList.add('main');
 
-  for (const child of childs) {
-    el.append(child)
-  }
+  document.body.append(el);
+
+  isRender = true;
 
   return el;
 };
