@@ -30,22 +30,23 @@
   &__list {
     display: grid;
     gap: 32px 8px;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    justify-content: space-evenly;
+    grid-template-columns: repeat(auto-fit, 140px);
     padding-bottom: 40px;
 
     @media (min-width: 768px) {
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      grid-template-columns: repeat(auto-fit, 230px);
       gap: 32px 10px;
     }
 
     @media (min-width: 1024px) {
-      grid-template-columns: repeat(auto-fit, minmax(302px, 1fr));
+      grid-template-columns: repeat(auto-fit, 302px);
       gap: 40px 16px;
       padding-bottom: 60px;
     }
 
     @media (min-width: 1440px) {
-      grid-template-columns: repeat(auto-fit, minmax(302px, 1fr));
+      grid-template-columns: repeat(auto-fit, 302px);
     }
   }
 }

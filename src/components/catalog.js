@@ -17,6 +17,7 @@ export const catalog = (data, parent) => {
   for (const item of data) {
     const urlLeft = new URL(window.location.href);
     urlLeft.searchParams.set('type', item);
+    urlLeft.searchParams.set('page', 1);
 
     const href = urlLeft.pathname + urlLeft.search;
     catalogItem =

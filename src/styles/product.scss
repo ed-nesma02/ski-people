@@ -169,16 +169,6 @@
   &__like {
     align-self: center;
     flex-shrink: 0;
-
-    &-svg {
-      &:hover {
-        stroke: #0044f0;
-      }
-    }
-    &_active {
-      stroke: #0044f0;
-      fill: #0044f0;
-    }
   }
 }
 

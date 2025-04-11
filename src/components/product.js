@@ -1,39 +1,45 @@
-import { layout } from "./layout"
-import { API_URL } from "../js/const"
+import { layout } from './layout';
+import { API_URL } from '../js/const';
+import { localStorageLoad } from '../js/localStorage';
 
 export const product = (data, parent) => {
-  const el = document.createElement('section')
-  el.classList.add('product')
+  const el = document.createElement('section');
+  el.classList.add('product');
 
-  let sliderMainImg = ''
+  const favoriteItems = localStorageLoad('favorite');
+
+  let sliderMainImg = '';
 
   for (const item of data.imgs) {
-    sliderMainImg = sliderMainImg + `
+    sliderMainImg =
+      sliderMainImg +
+      `
       <div class="swiper-slide slider-img__slide">
         <img
           class="slider-img__img"
           src="${API_URL}/img${item}"
         />
       </div>
-    `
+    `;
   }
 
-  let sliderThumbImg = ''
+  let sliderThumbImg = '';
 
   for (const item of data.imgs) {
-    sliderThumbImg = sliderThumbImg + `
+    sliderThumbImg =
+      sliderThumbImg +
+      `
       <div class="swiper-slide slider-thumbnails__item">
         <img
           class="slider-thumbnails__img"
           src="${API_URL}/img${item}"
         />
       </div>
-    `
+    `;
   }
 
-
   const child = `
-    ${data.name ? `<h2 class="product__title">${data.name}</h2>`: ''}
+    ${data.name ? `<h2 class="product__title">${data.name}</h2>` : ''}
     <div class="product__description">
       <div class="product__slider-wrapper">
         <div class="swiper product__slider">
@@ -131,10 +137,12 @@ export const product = (data, parent) => {
           </tr>
         </table>
         <div class="info-buttons">
-          <button data-id="${data.id}" class="info-buttons__to-cart" type="button">
+          <button data-id="${
+            data.id
+          }" class="info-buttons__to-cart" type="button">
             В корзину
           </button>
-          <button data-id="${data.id}" class="info-buttons__like">
+          <button data-id="${data.id}" class="info-buttons__like button__like ${favoriteItems.includes(data.id) ? 'button__like_active' : ''}">
             <svg
               width="16"
               height="16"
@@ -155,8 +163,8 @@ export const product = (data, parent) => {
         </div>
       </div>
     </div>
-  `
+  `;
 
-  el.append(layout(child, 'product__container'))
+  el.append(layout(child, 'product__container'));
   return parent.append(el);
-}
+};

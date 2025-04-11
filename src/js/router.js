@@ -10,6 +10,7 @@ import { cart } from '../components/cart.js';
 import { breadcrumb } from '../components/breadcrumb.js';
 import { product } from '../components/product.js';
 import { order } from '../components/order.js';
+import { localStorageLoad } from './localStorage.js';
 
 const router = new Navigo('/', {
   linksSelector: 'a[href^="/"]',
@@ -26,8 +27,8 @@ export const initRouter = () => {
       '/',
       async ({ params }) => {
         let type = params?.type;
-        console.log('type: ', type);
-        const products = await getProducts(type);
+        let page = params?.page;
+        const products = await getProducts({type, page});
         const categories = await getCategories();
         catalog(categories, main());
         goods(null, products, main());
@@ -42,9 +43,11 @@ export const initRouter = () => {
     )
     .on(
       '/favorite',
-      () => {
-        breadcrumb()
-        goods('Избранное', null, main())
+      async () => {
+        const listFavorite = localStorageLoad('favorite')
+        const productsFavotire = listFavorite.length ? await getProducts({list: listFavorite}) : [];
+        breadcrumb({name: 'Избранное'}, main())
+        goods('Избранное', productsFavotire, main())
         router.updatePageLinks();
       },
       {

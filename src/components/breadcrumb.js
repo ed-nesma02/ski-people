@@ -17,12 +17,20 @@ export const breadcrumb = (data = null, parent) => {
         <li class="breadcrumb__item">
           <a href="/" class="breadcrumb__link">Главная</a>
         </li>
-        <li class="breadcrumb__item">
+       ${
+         data.type
+           ? `<li class="breadcrumb__item">
           <a href="${href}" class="breadcrumb__link">${data.type}</a>
-        </li>
-        <li class="breadcrumb__item">
+        </li>`
+           : ''
+       }
+        ${
+          data.name
+            ? `<li class="breadcrumb__item">
           <p class="breadcrumb__link">${data.name}</p>
-        </li>
+        </li>`
+            : ''
+        }
       </ul>
     </nav>
   `;
