@@ -1,6 +1,6 @@
 import { API_URL } from './const';
 
-export const getProducts = async ({type, list, page}) => {
+export const getProducts = async ({ type, list, page, search }) => {
   try {
     const url = new URL(`${API_URL}/api/goods`);
     if (type) {
@@ -13,6 +13,10 @@ export const getProducts = async ({type, list, page}) => {
 
     if (page) {
       url.searchParams.append('page', page);
+    }
+
+    if (search) {
+      url.searchParams.append('search', search);
     }
 
     const response = await fetch(url);

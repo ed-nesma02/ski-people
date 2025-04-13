@@ -12,7 +12,7 @@ import { product } from '../components/product.js';
 import { order } from '../components/order.js';
 import { localStorageLoad } from './localStorage.js';
 
-const router = new Navigo('/', {
+export const router = new Navigo('/', {
   linksSelector: 'a[href^="/"]',
 });
 
@@ -32,6 +32,23 @@ export const initRouter = () => {
         const categories = await getCategories();
         catalog(categories, main());
         goods(null, products, main());
+        router.updatePageLinks();
+      },
+      {
+        leave(done) {
+          main().innerHTML = '';
+          done();
+        },
+      }
+    )
+    .on(
+      '/search',
+      async ({ params }) => {
+        let search = params?.search;
+        let page = params?.page;
+        const products = await getProducts({search, page});
+        breadcrumb({name: `Поиск: ${search}`}, main())
+        goods(`Результаты поиска: ${search}`, products, main());
         router.updatePageLinks();
       },
       {

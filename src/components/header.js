@@ -1,3 +1,4 @@
+import { search } from "../js/search.js"
 import { layout } from "./layout.js"
 
 export const header = () => {
@@ -119,5 +120,6 @@ export const header = () => {
 
   document.body.append(el)
 
+  search()
   return el;
 }

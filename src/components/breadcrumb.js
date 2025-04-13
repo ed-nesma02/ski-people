@@ -35,6 +35,12 @@ export const breadcrumb = (data = null, parent) => {
     </nav>
   `;
 
+  const existBreadcrumb = document.querySelector('.breadcrumb__container');
+  if (existBreadcrumb) {
+    existBreadcrumb.innerHTML = child;
+    return;
+  }
+
   el.append(layout(child, 'breadcrumb__container'));
   return parent.append(el);
 };
